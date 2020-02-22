@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 
 //DB Connection and error handling middleware
 mongoose.connect(
-    process.env.DB_CONNECTION,
+    process.env.MONGODB_URI,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -83,7 +83,7 @@ function errorHandler(error, req, res, next) {
             error: { message: error.message, status: error.status ? error.status: 500 }
         }
     }
-    
+
     res.status(response.error.status).json(response);
 }
 app.use(errorHandler)
