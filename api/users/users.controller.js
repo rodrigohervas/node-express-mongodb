@@ -13,7 +13,6 @@ module.exports = {
                 )
         }
         catch (error) {
-            console.log('erro status: ', error)
             next({ message: 'error while getting users' })
         }
     },
