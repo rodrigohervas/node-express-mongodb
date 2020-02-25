@@ -43,8 +43,13 @@ function connectionErrorHandler(error) {
 function handleAccessSecurity(req, res, next) {
     const apiKey = req.get('authorization')
 
+    //avoid apiKey on home ('/') and about ('/about') paths
+    if(req.path === '/' || req.path === '/about') {
+        next()
+    }    
+
+    //mandatory apiKey for the rest of the paths
     if (!apiKey || apiKey.split(' ')[1] !== process.env.API_KEY) {
-        //return res.status(403).json('not authorized')
         next({ status: '401', message: 'Unauthorized request' })
     }
 
@@ -56,14 +61,14 @@ app.use(handleAccessSecurity)
 
 // -> Home
 app.get("/", (req, res) => {
-    res.json("Home page");
+    res.json("Welcome to the app.");
 });
 
 // -> About
 app
     .route("/about")
     .get((req, res) => {
-        res.json("About page");
+        res.json('About us');
     });
 
 // -> Users
