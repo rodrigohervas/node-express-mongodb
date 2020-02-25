@@ -46,10 +46,22 @@ module.exports = {
     },
 
     deleteUser(req, res, next) {
-        const id = req.body.id;
+        const id = req.params.id;
         try {
+
+            User.findById(id)
+                .then(result => {
+                    if (!result) {
+                        next({ message: 'no user found', status: '404'})
+                    }
+                })
+                .catch(error =>
+                    next({ message: 'no user for provided id' })
+                )
+
+
             User.deleteOne({ _id: id })
-                .then(() => res.status(204).json("user deleted"))
+                .then( result => res.status(204).json(`${result} user deleted`))
                 .catch(error =>
                     next({ message: 'error deleting user' })
                 )
@@ -62,9 +74,10 @@ module.exports = {
 
     updateUser(req, res, next) {
         const user = req.body;
+        const userId = req.params.id
         try {
             User.updateOne(
-                { _id: user.id }, //find criteria
+                { _id: userId }, //find criteria
                 { //update values
                     name: user.name,
                     telephone: user.telephone,
@@ -73,9 +86,12 @@ module.exports = {
                     company: user.company
                 }
             )
-                .then(user => res.status(200).json(user))
+                .then(result => {
+                    res.status(200).json(`${result.nModified} user updated`)
+                })
                 .catch(error =>
-                    next({ message: 'error after updating user', status: 201 })
+                    next({ message: 'error updating user', status: '400' })
+
                 )
         }
         catch (error) {
