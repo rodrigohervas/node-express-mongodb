@@ -14,6 +14,9 @@ https://afternoon-plateau-95822.herokuapp.com/
 
 ## To make a request
 
-Use authentication with a Bearer token (f8a6747b-8ae5-47e7-9828-6cd1afd1564f).
+Use authentication with a Bearer token (f8a6747b-8ae5-47e7-9828-6cd1afd1564f). The token is for test purposes.
 
-The above token is for test purposes.
+Endpoints:
+
+.get/delete/update a user: /users/:id
+.get users/create user: /users
