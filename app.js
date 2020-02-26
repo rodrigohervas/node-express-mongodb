@@ -46,10 +46,8 @@ function handleAccessSecurity(req, res, next) {
     //avoid apiKey on home ('/') and about ('/about') paths
     if(req.path === '/' || req.path === '/about') {
         next()
-    }    
-
-    //mandatory apiKey for the rest of the paths
-    if (!apiKey || apiKey.split(' ')[1] !== process.env.API_KEY) {
+    }
+    else if (!apiKey || apiKey.split(' ')[1] !== process.env.API_KEY) { //mandatory apiKey for the rest of the paths
         next({ status: '401', message: 'Unauthorized request' })
     }
 
