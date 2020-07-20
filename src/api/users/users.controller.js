@@ -1,8 +1,12 @@
-const mongoose = require("mongoose");
-const User = require("./users.model");
+const mongoose = require("mongoose")
+const User = require("./users.model")
+const logger = require('../../logger')
+
 
 //define actions/methods
-module.exports = {
+const UsersController = {
+
+
 
     getUsers(req, res, next) {
         try {
@@ -13,6 +17,7 @@ module.exports = {
                 )
         }
         catch (error) {
+            logger.error(`${error.message} at users.controller.getUsers`)
             next({ message: 'error while getting users' })
         }
     },
@@ -27,6 +32,7 @@ module.exports = {
                 )
         }
         catch (error) {
+            logger.error(`${error.message} at users.controller.getUser`)
             next({ message: 'error while getting user' })
         }
     },
@@ -41,6 +47,7 @@ module.exports = {
                 )
         }
         catch (error) {
+            logger.error(`${error.message} at users.controller.createUser`)
             next({ message: 'error while creating user' })
         }
     },
@@ -48,7 +55,6 @@ module.exports = {
     deleteUser(req, res, next) {
         const id = req.params.id;
         try {
-
             User.findById(id)
                 .then(result => {
                     if (!result) {
@@ -58,15 +64,15 @@ module.exports = {
                 .catch(error =>
                     next({ message: 'no user for provided id' })
                 )
-
-
+            
             User.deleteOne({ _id: id })
-                .then( result => res.status(204).json(`${result} user deleted`))
+                .then( result => res.status(200).json(`${result.deletedCount} user deleted`) )
                 .catch(error =>
                     next({ message: 'error deleting user' })
                 )
         }
         catch (error) {
+            logger.error(`${error.message} at users.controller.deleteUser`)
             next({ message: 'error while deleting user' })
         }
 
@@ -91,11 +97,13 @@ module.exports = {
                 })
                 .catch(error =>
                     next({ message: 'error updating user', status: '400' })
-
                 )
         }
         catch (error) {
+            logger.error(`${error.message} at users.controller.updateUser`)
             next({ message: 'error while updating user' })
         }
     }
 }
+
+module.exports = UsersController

@@ -1,4 +1,9 @@
 const mongoose = require("mongoose");
+const mongoDbConnection = require('../../mongoDbConnection')
+const config = require('../../config')
+
+
+const dbConnection = mongoDbConnection(config.MONGODB_URI_SAMPLES)
 
 const UserSchema = new mongoose.Schema({
     name: {
@@ -23,4 +28,4 @@ const UserSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model("Users", UserSchema);
+module.exports = dbConnection.model("Users", UserSchema);

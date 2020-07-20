@@ -1,0 +1,16 @@
+
+{"message":"w has to be a number or a string at movies.controller.createMovie","level":"error"}
+{"message":"error after creating movie","level":"error"}
+{"message":"w has to be a number or a string at movies.controller.createMovie","level":"error"}
+{"message":"error after creating movie","level":"error"}
+{"message":"w has to be a number or a string at movies.controller.createMovie","level":"error"}
+{"message":"error after creating movie","level":"error"}
+{"message":"w has to be a number or a string at movies.controller.createMovie","level":"error"}
+{"message":"error after creating movie","level":"error"}
+{"message":"movie.save is not a function at movies.controller.createMovie","level":"error"}
+{"message":"error creating movie","level":"error"}
+{"message":"w has to be a number or a string at movies.controller.createMovie","level":"error"}
+{"message":"error after creating movie","level":"error"}
+{"message":"error after getting movies","level":"error"}
+{"message":"error after getting movies","level":"error"}
+{"message":"error after getting movies","level":"error"}
